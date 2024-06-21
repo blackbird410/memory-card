@@ -33,6 +33,35 @@
   }
 }
 
+#main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+#game-title {
+  grid-area: 1 / 1 / 2 / 3;
+  font-size: 2rem;
+}
+ 
+#game-description {
+  padding: 1rem;
+  text-align: center;
+}
+
+#game-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .card {
   padding: 2em;
 }

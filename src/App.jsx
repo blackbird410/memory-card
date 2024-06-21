@@ -1,45 +1,64 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import gojo from "./assets/Gojo Satoru.jpg";
+import aoi from "./assets/Aoi Todo.jpg";
+import megumi from "./assets/Megumi Fushiguro.jpg";
+import toji from "./assets/Toji Fushiguro.jpg";
+import yuta from "./assets/Yuta Okkotsu.jpg";
+import maki from "./assets/Maki Zenin.jpg";
+import mai from "./assets/Mai Zenin.jpg";
+import geto from "./assets/Suguru Geto.jpg";
+import kugisaki from "./assets/Nobara Kugisaki.jpg";
+import yuji from "./assets/Itadori Yuji.jpg";
+import sukuna from "./assets/Ryomen Sukuna.jpg";
 
-// Save the new pictures with their respective names
-// so that we can use their paths without hardcoding it
-// P.S: Filetype used is jpg
 const characters = [
-  "Gojo Satoru",
-  "Gon Freecss",
-  "Sasuke Uchiha",
-  "Naruto Uzumaki",
-  "Neji Hyuga",
+  { name:  "Gojo Satoru", url: gojo },
+  { name:  "Aoi Todo", url: aoi  },
+  { name:  "Itadori Yuji", url: yuji },
+  { name:  "Ryomen Sukuna", url: sukuna },
+  { name:  "Megumi Fushiguro", url: megumi },
+  { name:  "Toji Fushigiro", url: toji },
+  { name:  "Yuta Okkotsu", url: yuta },
+  { name:  "Maki Zenin", url: maki },
+  { name:  "Mai Zenin", url: mai },
+  { name:  "Suguru Geto", url: geto },
+  { name:  "Nobara Kugisaki", url: kugisaki },
 ];
+
+// We will change the game display such that 
+// One card will be shown to the player at a time and the player 
+// will determine whether he or she has already seen the picture
+// Until all the cards have been seen, the game will continue asking the player
 
 function Card({ card, handleUpdateScore }) {
   return (
     <div
       className="card-wrapper"
-      id={card.name}
-      onClick={() => handleUpdateScore()}
+      onClick={handleUpdateScore}
     >
-      <img src={card.url} alt={card.name} />
+      <img id={card.name} src={card.url} alt={card.name} />
       <div className="card-name">{card.name}</div>
     </div>
   );
 }
 
-function CardBoard({ list = {}, score, bestScore, handleUpdateScore }) {
+function CardBoard({ list, score, bestScore, handleUpdateScore }) {
   return (
-    <div className="main">
+    <div id="main">
       <div className="header">
         <div id="game-title">Memory Card</div>
         <div id="game-description">
           The game is simple, try not to click the same card twice to get the
-          increase your score. Let's see how good is your memory!
+          increase your score.<br/> Let's see how good is your memory!
         </div>
+
         <div id="game-status">
-          <label for="score">Score: {score}</label>
-          <label for="best-score">Best Score: {bestScore}</label>
+          <label htmlFor="score">Score: {score}</label>
+          <label htmlFor="best-score">Best Score: {bestScore}</label>
         </div>
       </div>
-      <div classname="board">
+      <div className="board">
         {
                     list.map((e) => (
                         <Card 
@@ -54,17 +73,13 @@ function CardBoard({ list = {}, score, bestScore, handleUpdateScore }) {
 }
 
 function App() {
-  const cardList = characters.map((c) => {
-    const parts = c.toLowerCase().split(" ");
-    return { name: c, url: `${parts.join("-")}.jpg` };
-  });
-
   const [cards, setCards] = useState([]);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
 
   const handleUpdateScore = (e) => {
     const cardName = e.target.id;
+    console.log(cardName, cards);
 
     // If the card was not already seen score is incremented, otherwise becomes 0
     if (cards.includes(cardName)) {
@@ -81,7 +96,7 @@ function App() {
   return (
     <>
       <CardBoard
-        list={cardList}
+        list={characters}
         score={score}
         bestScore={bestScore}
         handleUpdateScore={handleUpdateScore}
