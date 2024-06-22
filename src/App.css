@@ -1,3 +1,12 @@
+@font-face {
+    font-family: WardenRegular;
+    src: url("assets/Warden Regular.otf") format("otf"), url("assets/Warden Regular.woff2")  format("woff2");
+}
+
+:root {
+  --name-font: WardenRegular;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -36,14 +45,27 @@
 #main {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .header {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 1rem;
+  align-items: center;
+}
+
+
+div.board {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  overflow-y: scroll;
+  height: 70vh;
 }
 
 #game-title {
@@ -62,8 +84,29 @@
   justify-content: center;
 }
 
-.card {
+.card-wrapper {
+  max-width: 250px;
+  height: auto;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: fill;
+}
+
+div.card {
   padding: 2em;
+}
+
+.card-name {
+  font-size: 24px;
+  color: #535bf2;
+}
+
+body {
+  font-family: var(--name-font);
+  font-weight: bold;
 }
 
 .read-the-docs {
