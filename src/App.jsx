@@ -21,29 +21,37 @@ import nanami from "./assets/Kento Nanami.jpg";
 import panda from "./assets/Panda.jpg";
 import toge from "./assets/Toge Inumaki.jpg";
 
-const getName = (c) => {
-  let a = c.split("/");
-  a = a[a.length - 1].split(".")[0].split("%20").join(" ");
-  return a;
-}; 
-
-const characters = [ 
-  nanami, panda, toge, gojo, 
-  aoi, yuji, sukuna, megumi, 
-  toji, yuta, maki, mai, geto, 
-  kugisaki, choso, kenjaku, 
-  mahito, manami, uraume, yuki,
+const characters = [
+  { name:  "Gojo Satoru", url: gojo },
+  { name:  "Aoi Todo", url: aoi  },
+  { name:  "Itadori Yuji", url: yuji },
+  { name:  "Ryomen Sukuna", url: sukuna },
+  { name:  "Megumi Fushiguro", url: megumi },
+  { name:  "Toji Fushigiro", url: toji },
+  { name:  "Yuta Okkotsu", url: yuta },
+  { name:  "Maki Zenin", url: maki },
+  { name:  "Mai Zenin", url: mai },
+  { name:  "Suguru Geto", url: geto },
+  { name:  "Nobara Kugisaki", url: kugisaki },
+  { name:  "Choso", url: choso },
+  { name:  "Kenjaku", url: kenjaku },
+  { name:  "Mahito", url: mahito },
+  { name:  "Manami Suda", url: manami },
+  { name:  "Uraume", url: uraume },
+  { name:  "Yuki Tsukumo", url: yuki },
+  { name:  "Kento Nanami", url: nanami },
+  { name:  "Panda", url: panda },
+  { name:  "Toge Inukami", url: toge },
 ];
 
-function Card({ character, handleUpdateScore }) {
-  const name = getName(character);
+function Card({ card, handleUpdateScore }) {
   return (
     <div
       className="card-wrapper"
       onClick={handleUpdateScore}
     >
-      <img id={name} src={character} alt={name} />
-      <div className="card-name">{name}</div>
+      <img id={card.name} src={card.url} alt={card.name} />
+      <div className="card-name">{card.name}</div>
     </div>
   );
 }
@@ -67,8 +75,8 @@ function CardBoard({ list, score, bestScore, handleUpdateScore }) {
         {
                     list.map((e) => (
                         <Card 
-                            key={getName(e)} 
-                            character={e} 
+                            key={e.name} 
+                            card={e} 
                             handleUpdateScore={handleUpdateScore} 
                         />
         ))}
@@ -77,6 +85,7 @@ function CardBoard({ list, score, bestScore, handleUpdateScore }) {
     </div>
   );
 }
+
 
 function App() {
   const [cards, setCards] = useState([]);
