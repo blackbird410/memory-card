@@ -95,13 +95,21 @@ img {
   object-fit: fill;
 }
 
-div.card {
-  padding: 2em;
+.card-wrapper {
+  padding: 1rem;
+}
+
+.card-wrapper:hover {
+  box-shadow: 
+    inset 0 -3em 3em #564A94,
+    0 0 0 2px white,
+    0.3em 0.3em 1em #1F232F;
+  border-radius: 1rem;
+
 }
 
 .card-name {
   font-size: 24px;
-  color: #535bf2;
 }
 
 body {
